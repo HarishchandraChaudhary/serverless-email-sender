@@ -1,0 +1,121 @@
+{
+  "C:\\Users\\LENOVO\\OneDrive\\Desktop\\serverless-email-api-python\\serverless.yml": {
+    "versionFramework": "4.18.0",
+    "servicePath": "C:\\Users\\LENOVO\\OneDrive\\Desktop\\serverless-email-api-python\\serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "email-api-python",
+      "provider": {
+        "name": "aws",
+        "runtime": "python3.9",
+        "stage": "dev",
+        "region": "us-east-1",
+        "environment": {
+          "EMAIL_USER": "${env:EMAIL_USER}",
+          "EMAIL_PASS": "${env:EMAIL_PASS}",
+          "EMAIL_HOST": "smtp.gmail.com",
+          "EMAIL_PORT": "587"
+        },
+        "iamRoleStatements": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "ses:SendEmail",
+              "ses:SendRawEmail"
+            ],
+            "Resource": "*"
+          }
+        ]
+      },
+      "functions": {
+        "sendEmail": {
+          "handler": "handler.send_email",
+          "events": [
+            {
+              "http": {
+                "path": "send-email",
+                "method": "post",
+                "cors": true
+              }
+            }
+          ],
+          "timeout": 30
+        }
+      },
+      "plugins": [
+        "serverless-python-requirements",
+        "serverless-offline"
+      ],
+      "custom": {
+        "pythonRequirements": {
+          "dockerizePip": false,
+          "slim": true
+        },
+        "serverless-offline": {
+          "httpPort": 3000,
+          "host": "0.0.0.0"
+        }
+      },
+      "package": {
+        "exclude": [
+          "node_modules/**",
+          ".env",
+          "__pycache__/**",
+          ".pytest_cache/**",
+          "tests/**"
+        ]
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "python3.9",
+      "stage": "dev",
+      "region": "us-east-1",
+      "environment": {
+        "EMAIL_USER": "${env:EMAIL_USER}",
+        "EMAIL_PASS": "${env:EMAIL_PASS}",
+        "EMAIL_HOST": "smtp.gmail.com",
+        "EMAIL_PORT": "587"
+      },
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ses:SendEmail",
+            "ses:SendRawEmail"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "error": {
+      "message": "Cannot resolve '${env:EMAIL_USER}' variable at 'provider.environment.EMAIL_USER'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.",
+      "stack": "Error: Cannot resolve '${env:EMAIL_USER}' variable at 'provider.environment.EMAIL_USER'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.\n    at _ResolverManager.resolve (file:///C:/Users/LENOVO/.serverless/releases/4.18.0/package/dist/sf-core.js:809:31911)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async #handlePlaceholderNode (file:///C:/Users/LENOVO/.serverless/releases/4.18.0/package/dist/sf-core.js:809:30118)\n    at async file:///C:/Users/LENOVO/.serverless/releases/4.18.0/package/dist/sf-core.js:809:27990\n    at async processNodeAndHandleCompletion (file:///C:/Users/LENOVO/.serverless/releases/4.18.0/package/dist/sf-core.js:809:16769)",
+      "code": "MISSING_VARIABLE_RESULT"
+    },
+    "serviceRawFile": "service: email-api-python\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: python3.9\r\n  stage: dev\r\n  region: us-east-1\r\n  environment:\r\n    EMAIL_USER: ${env:EMAIL_USER}\r\n    EMAIL_PASS: ${env:EMAIL_PASS}\r\n    EMAIL_HOST: ${env:EMAIL_HOST, 'smtp.gmail.com'}\r\n    EMAIL_PORT: ${env:EMAIL_PORT, '587'}\r\n  iamRoleStatements:\r\n    - Effect: Allow\r\n      Action:\r\n        - ses:SendEmail\r\n        - ses:SendRawEmail\r\n      Resource: \"*\"\r\n\r\nfunctions:\r\n  sendEmail:\r\n    handler: handler.send_email\r\n    events:\r\n      - http:\r\n          path: send-email\r\n          method: post\r\n          cors: true\r\n    timeout: 30\r\n\r\nplugins:\r\n  - serverless-python-requirements\r\n  - serverless-offline\r\n\r\ncustom:\r\n  pythonRequirements:\r\n    dockerizePip: false\r\n    slim: true\r\n  serverless-offline:\r\n    httpPort: 3000\r\n    host: 0.0.0.0\r\n\r\npackage:\r\n  exclude:\r\n    - node_modules/**\r\n    - .env\r\n    - __pycache__/**\r\n    - .pytest_cache/**\r\n    - tests/**\r\n",
+    "command": [
+      "offline",
+      "start"
+    ],
+    "options": {},
+    "orgId": "6a26c5b5-70ad-4025-80a0-8c461ca4d7b9",
+    "orgName": "harish123",
+    "userId": "3Dp6vYmlcY179YVWGy",
+    "userName": "harish123",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}
